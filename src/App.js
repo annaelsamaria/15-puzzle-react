@@ -16,11 +16,8 @@ const generateNewBoard = () => {
 
 const initialBoard = generateNewBoard
 
-const startArray = chunk(Array.from(Array(rows * columns), (_, i) => i === 0 ? null : i), columns)
-console.log(startArray)
-
-const winningBoard = startArray.push(startArray.shift())
-
+const winningBoard = chunk(Array.from(Array(rows * columns), (_, i) => i === 0 ? null : i), columns)
+console.log(winningBoard)
 
 
 const isGameFinished = (board) => {
