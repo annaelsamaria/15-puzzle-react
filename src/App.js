@@ -3,8 +3,8 @@ import './app.css'
 import { chunk, shuffle } from "lodash"
 
 
-const rows = 4
-const columns = 4
+const rows = 2
+const columns = 2
 
 
 const generateNewBoard = () => {
@@ -16,8 +16,8 @@ const generateNewBoard = () => {
 
 const initialBoard = generateNewBoard
 
-const winningBoard = chunk(Array.from(Array(rows * columns), (_, i) => i === 0 ? null : i), columns)
-console.log(winningBoard)
+const winningBoard = chunk(Array.from(Array(rows * columns), (_, i) => i + 1), columns)
+winningBoard[rows - 1][columns - 1] = null
 
 
 const isGameFinished = (board) => {
@@ -43,7 +43,7 @@ export const App = () => {
 
     const tileValue = board[rowIndex][columnIndex]
 
-    //   * Can it move up? = is it not on the top row && is the tile in the row above it null?
+    // Can it move up?
     if (
       rowIndex >= 1 && board[rowIndex - 1][columnIndex] === null
     ) {
@@ -53,7 +53,7 @@ export const App = () => {
       setBoard(newBoard)
       setWon(isGameFinished(board))
     }
-    //   * Can it move down? = is it not on the bottom row && if the tile in the row below it null?
+    //Can it move down?
     else if (
       rowIndex + 1 !== board.length && board[rowIndex + 1][columnIndex] === null
     ) {
@@ -64,7 +64,7 @@ export const App = () => {
       setWon(isGameFinished(board))
     }
 
-    //   * Can it move right? = is it not on the final column && is the tile to the right of it null?
+    //Can it move right?
     else if (
       columnIndex !== board.length && board[rowIndex][columnIndex + 1] === null
     ) {
@@ -74,7 +74,7 @@ export const App = () => {
       setBoard(newBoard)
       setWon(isGameFinished(board))
     }
-    //   * Can it move left? = is it not on the first column && is the tile to the left of it null?
+    //Can it move left?
     else if (
       columnIndex >= 1 && board[rowIndex][columnIndex - 1] === null
     ) {
